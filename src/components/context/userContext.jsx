@@ -17,6 +17,7 @@ export const UserProvider = ({children}) => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log(isLogged)
         if (isLogged) {
           navigate("/contacts");
         }

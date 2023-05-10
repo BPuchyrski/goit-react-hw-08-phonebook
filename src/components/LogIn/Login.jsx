@@ -3,7 +3,7 @@ import css from './Login.module.css'
 import { useUser } from 'components/context/userContext'
 
 const Login = () => {
-    const {login, isLogged} = useUser()
+    const {login} = useUser()
     const navigate = useNavigate()
 
     const navigateToRegister = () => {

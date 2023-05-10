@@ -1,4 +1,4 @@
-import { lazy } from "react";
+
 import { Route, Routes } from "react-router-dom";
 import Login from './LogIn/Login'
 import Register from './Register/Register'
