@@ -3,11 +3,10 @@ import { useUser } from "components/context/userContext"
 
 
 const Contacts = () => {
-const {token, user, logout, islogged} = useUser()
+const { user, logout, islogged} = useUser()
 
- const [acces] = useState(!islogged)
- console.log(`${token} to jest token`)
- console.log(islogged)
+ const [acces] = useState(islogged)
+ 
 
     return (
         <div>

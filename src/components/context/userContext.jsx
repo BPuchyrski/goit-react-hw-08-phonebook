@@ -19,7 +19,7 @@ export const UserProvider = ({children}) => {
     useEffect(() => {
         
         if (isLogged) {
-            console.log('jestem zalogowany')
+            console.log('jestem zalogowany' + isLogged)
           navigate("/contacts");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,16 +51,25 @@ export const UserProvider = ({children}) => {
     }
     
     const login = async (credentials) => {
+        
         try {
             const response = await axios.post('https://connections-api.herokuapp.com/users/login', credentials)
+
+            const func  =  async () => { 
             setAuthHeader(response.data.token)
             setUser({ name: response.data.user.name, email: response.data.user.email })
             setToken(response.data.token)
             setIsLogged(true)
+            }
+
+            func()
+           
+            
         } catch (error) {
             console.log(error)
         }
 
+        
 
     }
 
@@ -79,6 +88,17 @@ export const UserProvider = ({children}) => {
 
     
     }
+
+    // const refresh = async () => {
+    //     try {
+    //         const response = await axios.get('https://connections-api.herokuapp.com/users/current')
+    //         setUser({ name: response.data.user.name, email: response.data.user.email })
+    //         setToken(response.data.token)
+    //         setIsLogged(true)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }   
+    // }
 
     
     return (

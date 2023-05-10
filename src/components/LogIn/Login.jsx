@@ -14,7 +14,7 @@ const Login = () => {
         e.preventDefault()
         const email = e.currentTarget.elements.email.value
         const password = e.target.password.value
-        console.log(JSON.stringify({email: email, password: password}))
+        // console.log(JSON.stringify({email: email, password: password}))
        
         login({
             email: email,
