@@ -44,6 +44,7 @@ export const UserProvider = ({ children }) => {
         email: response.data.user.email,
       });
       setToken(response.data.token);
+      alert('account created');
     } catch (error) {
       console.log(error);
     }
