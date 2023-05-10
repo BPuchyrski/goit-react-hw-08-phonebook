@@ -11,7 +11,7 @@ const {token, user, logout, islogged} = useUser()
 
     return (
         <div>
-        {islogged ? <button onClick={logout}>Logout</button> : <p>Not logged in</p> }
+        {!islogged ? <button onClick={logout}>Logout</button> : <p>Not logged in</p> }
         <h1>hello {user.name}</h1>
         </div>
     )
