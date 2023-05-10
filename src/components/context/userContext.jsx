@@ -10,7 +10,7 @@ export const UserProvider = ({children}) => {
     const [user, setUser] = useState({name: null, email:null})
     const [token, setToken] = useState(null)
     const [isLogged, setIsLogged] = useState(false)
-    const [isRefreshing, setIsRefreshing] = useState(false)
+    const [isRefreshing] = useState(false)
 
     
    
@@ -21,6 +21,7 @@ export const UserProvider = ({children}) => {
         if (isLogged) {
           navigate("/contacts");
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isLogged]);
 
     const setAuthHeader = (token) => {
