@@ -17,8 +17,9 @@ export const UserProvider = ({children}) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(isLogged)
+        
         if (isLogged) {
+            console.log('jestem zalogowany')
           navigate("/contacts");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
