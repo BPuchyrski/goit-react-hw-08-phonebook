@@ -44,7 +44,6 @@ export const UserProvider = ({ children }) => {
         email: response.data.user.email,
       });
       setToken(response.data.token);
-      setZalogowany(true);
     } catch (error) {
       console.log(error);
     }
