@@ -1,4 +1,4 @@
-import {  useState } from "react"
+// import {  useState } from "react"
 import { useUser } from "components/context/userContext"
 
 
@@ -11,8 +11,8 @@ const {token, user, logout, islogged} = useUser()
 
     return (
         <div>
-        {acces ? <button onClick={logout}>Logout</button> : <p>Not logged in</p> }
-        <h1 onClick={() => setacces((prev) => !prev)} >hello {user.name}</h1>
+        {islogged ? <button onClick={logout}>Logout</button> : <p>Not logged in</p> }
+        <h1>hello {user.name}</h1>
         </div>
     )
 }
