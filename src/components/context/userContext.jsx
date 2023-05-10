@@ -9,7 +9,7 @@ export const UserProvider = ({children}) => {
     // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/'
     const [user, setUser] = useState({name: null, email:null})
     const [token, setToken] = useState(null)
-    const [isLogged, setIsLogged] = useState(false)
+    const [zalogowany, setZalogowany] = useState(false)
     const [isRefreshing] = useState(false)
 
     
@@ -18,12 +18,13 @@ export const UserProvider = ({children}) => {
 
     useEffect(() => {
         
-        if (isLogged) {
-            console.log('jestem zalogowany' + isLogged)
-          navigate("/contacts");
+        if (zalogowany) {
+            console.log('jestem zalogowany' + zalogowany)
+                navigate("/contacts");
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [isLogged]);
+      , [zalogowany]);
 
     const setAuthHeader = (token) => {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`
@@ -41,7 +42,7 @@ export const UserProvider = ({children}) => {
             setAuthHeader(response.data.token)
             setUser({ name: response.data.user.name, email: response.data.user.email })
             setToken(response.data.token)
-            setIsLogged(true)
+            setZalogowany(true)
            
            
         } catch (error) {
@@ -54,16 +55,10 @@ export const UserProvider = ({children}) => {
         
         try {
             const response = await axios.post('https://connections-api.herokuapp.com/users/login', credentials)
-
-            const func  =  async () => { 
             setAuthHeader(response.data.token)
             setUser({ name: response.data.user.name, email: response.data.user.email })
             setToken(response.data.token)
-            setIsLogged(true)
-            }
-
-            func()
-           
+            setZalogowany(true)
             
         } catch (error) {
             console.log(error)
@@ -80,7 +75,7 @@ export const UserProvider = ({children}) => {
             clearAuthHeader()
             setUser({name: null, email: null})
             setToken(null)
-            setIsLogged(false)
+            setZalogowany(false)
             navigate('/')
         } catch (error) {
             console.log(error)
@@ -102,7 +97,7 @@ export const UserProvider = ({children}) => {
 
     
     return (
-        <UserContext.Provider value={{user, token, isLogged, isRefreshing, clearAuthHeader, register, login, logout}}>
+        <UserContext.Provider value={{user, token, zalogowany, isRefreshing, clearAuthHeader, register, login, logout}}>
             {children}
         </UserContext.Provider>
     )
