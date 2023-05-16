@@ -13,6 +13,23 @@ export const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const localToken = localStorage.getItem('token');
+    if (localToken) {
+      const parsedToken = JSON.parse(localToken);
+      const localUser = localStorage.getItem('user');
+      const parsedUser = JSON.parse(localUser);
+      const localEmail = localStorage.getItem('email');
+      const parsedEmail = JSON.parse(localEmail);
+      setUser({ name: parsedUser, email: parsedEmail });
+      setToken(parsedToken);
+      setAuthHeader(parsedToken);
+      setZalogowany(true);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(
     () => {
       if (zalogowany) {
@@ -62,6 +79,9 @@ export const UserProvider = ({ children }) => {
         email: response.data.user.email,
       });
       setToken(response.data.token);
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+      localStorage.setItem('user', JSON.stringify(response.data.user.name));
+      localStorage.setItem('email', JSON.stringify(response.data.user.email));
       setZalogowany(true);
     } catch (error) {
       console.log(error);
@@ -79,6 +99,9 @@ export const UserProvider = ({ children }) => {
       setToken(null);
       setZalogowany(false);
       navigate('/');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('email');
     } catch (error) {
       console.log(error);
     }
@@ -100,6 +123,7 @@ export const UserProvider = ({ children }) => {
       value={{
         user,
         token,
+        setToken,
         zalogowany,
         isRefreshing,
         clearAuthHeader,
